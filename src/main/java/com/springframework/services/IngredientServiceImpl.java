@@ -2,7 +2,6 @@ package com.springframework.services;
 
 import com.springframework.api.v2.mapper.IngredientMapper;
 import com.springframework.api.v2.model.IngredientDTO;
-import com.springframework.api.v2.model.IngredientListDTO;
 import com.springframework.exceptions.NotFoundException;
 import com.springframework.models.Ingredient;
 import com.springframework.models.Recipe;

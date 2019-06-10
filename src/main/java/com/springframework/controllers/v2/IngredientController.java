@@ -1,7 +1,6 @@
 package com.springframework.controllers.v2;
 
 import com.springframework.api.v2.model.IngredientDTO;
-import com.springframework.api.v2.model.IngredientListDTO;
 import com.springframework.api.v2.model.RecipeDTO;
 import com.springframework.api.v2.model.ResponseDTO;
 import com.springframework.exceptions.NotFoundException;
