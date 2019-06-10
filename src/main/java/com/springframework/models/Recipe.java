@@ -28,7 +28,7 @@ public class Recipe {
     private Difficulty difficulty;
 
     @Lob
-    private Byte[] images;
+    private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
@@ -56,4 +56,5 @@ public class Recipe {
         this.ingredients.add(ingredient);
         return this;
     }
+
 }

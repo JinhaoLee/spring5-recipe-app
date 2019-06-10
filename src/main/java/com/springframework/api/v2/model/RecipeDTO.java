@@ -44,7 +44,7 @@ public class RecipeDTO {
 
     private NotesDTO notes;
     private Difficulty difficulty;
-    private Byte[] images;
+    private Byte[] image;
     private List<CategoryDTO> categories = new ArrayList<>();
     private List<IngredientDTO> ingredients = new ArrayList<>();
 }

@@ -30,7 +30,7 @@ public class SwaggerConfig {
         Contact contact = new Contact("Jinhao", "https://google.com.au",
                 "lijinhao828@gmail.com");
         return new ApiInfo(
-                "Spring Framework Guru",
+                "Spring Framework",
                 "Spring Framework 5: Recipe Application",
                 "1.0",
                 "Terms of Service: blah",

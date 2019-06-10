@@ -29,7 +29,7 @@ public class RecipeController {
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public RecipeDTO getRecipeById(@PathVariable Long id) {
-        log.debug("Getting id: " + id);
+        log.info("Getting id: " + id);
         return recipeService.getRecipeById(id);
     }
 
@@ -48,7 +48,7 @@ public class RecipeController {
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteRecipe(@PathVariable Long id) {
-        log.debug("Deleting id: " + id);
+        log.info("Deleting id: " + id);
         recipeService.deleteRecipeById(id);
     }
 
