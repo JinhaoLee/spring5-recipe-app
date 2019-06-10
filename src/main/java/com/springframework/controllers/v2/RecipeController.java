@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Slf4j
 @RestController
 @RequestMapping(RecipeController.BASE_URL)
@@ -15,12 +17,8 @@ public class RecipeController {
 
     public final static String BASE_URL = "api/v2/recipes";
 
-//    @Autowired //todo add DI
+    @Autowired
     private RecipeService recipeService;
-
-    public RecipeController(RecipeService recipeService) {
-        this.recipeService = recipeService;
-    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -37,7 +35,7 @@ public class RecipeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RecipeDTO saveRecipe(@RequestBody RecipeDTO recipeDTO) {
+    public RecipeDTO saveRecipe(@Valid @RequestBody RecipeDTO recipeDTO) {
         return recipeService.createNewRecipe(recipeDTO);
     }
 

@@ -7,7 +7,12 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel="spring", uses = UnitOfMeasureMapper.class)
 public interface IngredientMapper {
+
     @Mapping(target = "recipeId", source = "recipe.id")
     @Mapping(target = "uom", source = "unitOfMeasure")
     IngredientDTO ingredientToIngredientDTO(Ingredient ingredient);
+
+    @Mapping(target = "recipe.id", source = "recipeId")
+    @Mapping(target = "unitOfMeasure", source = "uom")
+    Ingredient ingredientDtoToIngredient(IngredientDTO ingredientDTO);
 }

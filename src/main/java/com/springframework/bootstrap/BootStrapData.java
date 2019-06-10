@@ -28,32 +28,9 @@ public class BootStrapData implements ApplicationListener<ContextRefreshedEvent>
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        recipeRepository.saveAll(getRecipes());
-        System.out.println("Loading Bootstrap Data");
+//        recipeRepository.saveAll(getRecipes());
+//        System.out.println("Loading Bootstrap Data");
     }
-//    @Override
-//    public void run(String... args) throws Exception {
-//        loadRecipes();
-//    }
-
-//    private void loadRecipes() {
-//        //given
-//        Recipe recipe = new Recipe();
-//        Notes notes = new Notes();
-//        notes.setRecipeNotes("test!!!");
-//
-//        recipe.setDescription("Test");
-//        recipe.setCookTime(1);
-//        recipe.setPrepTime(2);
-//        recipe.setDifficulty(Difficulty.EASY);
-//        recipe.setDirections("Right");
-//        recipe.setSource("source");
-//        recipe.setNotes(notes);
-//
-//        recipeRepository.save(recipe);
-//
-//        System.out.println("Recipes Loaded: " + recipeRepository.count());
-//    }
 
     private List<Recipe> getRecipes() {
 

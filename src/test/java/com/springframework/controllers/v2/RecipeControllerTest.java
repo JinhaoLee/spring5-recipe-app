@@ -32,6 +32,7 @@ class RecipeControllerTest {
     private RecipeService recipeService;
 
     private final String BASE_URL = "http://localhost:8080/" + RecipeController.BASE_URL;
+
     @Test
     void getListOfRecipes() throws Exception {
         //given
