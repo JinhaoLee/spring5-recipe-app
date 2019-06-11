@@ -7,6 +7,7 @@ import com.springframework.models.Recipe;
 import com.springframework.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +30,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    @Transactional
     public RecipeDTO getRecipeById(Long id) {
         return recipeRepository
                 .findById(id)
@@ -37,12 +39,14 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    @Transactional
     public RecipeDTO createNewRecipe(RecipeDTO recipeDto) {
         Recipe recipe = recipeMapper.recipeDtoToRecipe(recipeDto);
         return saveAndReturnDTO(recipe);
     }
 
     @Override
+    @Transactional
     public RecipeDTO saveRecipeByDTO(Long id, RecipeDTO recipeDto) {
         Recipe recipe = recipeMapper.recipeDtoToRecipe(recipeDto);
         recipe.setId(id);

@@ -1,14 +1,15 @@
 package com.springframework.models;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Getter
+@Setter
 @Entity
-@Data
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,13 +49,18 @@ public class Recipe {
             this.notes = notes;
             notes.setRecipe(this);
         }
+    }
+
+    public void addIngredient(Ingredient ingredient){
+        if (ingredient != null) {
+            this.ingredients.add(ingredient);
+            ingredient.setRecipe(this);
+        }
 
     }
 
-    public Recipe addIngredient(Ingredient ingredient){
-        ingredient.setRecipe(this);
-        this.ingredients.add(ingredient);
-        return this;
+    public void setIngredients(final List<Ingredient> ingredients){
+        ingredients.forEach(this::addIngredient);
     }
 
 }
