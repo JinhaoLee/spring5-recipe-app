@@ -33,8 +33,9 @@ public class RecipeDTO {
 
     @Min(1)
     @Max(100)
+    private Integer servings;
+
     private String source;
-    private String servings;
 
     @URL
     private String url;
