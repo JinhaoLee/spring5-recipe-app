@@ -1,4 +1,7 @@
-# Spring Boot Recipe Application
+[![CircleCI](https://circleci.com/gh/JinhaoLee/spring5-recipe-app.svg?style=svg)](https://circleci.com/gh/JinhaoLee/spring5-recipe-app)
+
+
+# Spring Boot 2 Recipe Application
 
 ### Frameworks and Libraries:
 
