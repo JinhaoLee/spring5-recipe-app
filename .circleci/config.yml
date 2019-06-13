@@ -40,5 +40,5 @@ jobs:
       # run tests!
       - run: mvn integration-test
 
-      - after_success:
-          - bash <(curl -s https://codecov.io/bash) -t caa48fdd-7fc7-4537-b73c-9dd23219ef16
+      - run:
+          command: bash <(curl -s https://codecov.io/bash) -t caa48fdd-7fc7-4537-b73c-9dd23219ef16
