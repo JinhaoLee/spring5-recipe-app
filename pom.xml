@@ -94,6 +94,9 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.5</version>
         </dependency>
+
+        <!-- ... other dependency elements ... -->
+
     </dependencies>
 
     <build>

@@ -1,4 +1,4 @@
-package com.springframework.services;
+package com.springframework.services.impl;
 
 import com.springframework.api.v2.mapper.IngredientMapper;
 import com.springframework.api.v2.model.IngredientDTO;
@@ -7,6 +7,7 @@ import com.springframework.models.Ingredient;
 import com.springframework.models.Recipe;
 import com.springframework.repositories.RecipeRepository;
 import com.springframework.repositories.UnitOfMeasureRepository;
+import com.springframework.services.IngredientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,9 @@
-package com.springframework.services;
+package com.springframework.services.impl;
 
 import com.springframework.api.v2.mapper.UnitOfMeasureMapper;
 import com.springframework.api.v2.model.UnitOfMeasureDTO;
 import com.springframework.repositories.UnitOfMeasureRepository;
+import com.springframework.services.UnitOfMeasureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

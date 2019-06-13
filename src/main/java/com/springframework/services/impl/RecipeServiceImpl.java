@@ -1,10 +1,11 @@
-package com.springframework.services;
+package com.springframework.services.impl;
 
 import com.springframework.api.v2.mapper.RecipeMapper;
 import com.springframework.api.v2.model.RecipeDTO;
 import com.springframework.exceptions.NotFoundException;
 import com.springframework.models.Recipe;
 import com.springframework.repositories.RecipeRepository;
+import com.springframework.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
