@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/JinhaoLee/spring5-recipe-app.svg?style=svg)](https://circleci.com/gh/JinhaoLee/spring5-recipe-app)
 
+[![codecov](https://codecov.io/gh/JinhaoLee/spring5-recipe-app/branch/master/graph/badge.svg)](https://codecov.io/gh/JinhaoLee/spring5-recipe-app)
 
 # Spring Boot 2 Recipe Application
 
