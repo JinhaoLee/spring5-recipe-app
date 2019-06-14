@@ -7,6 +7,7 @@ import com.springframework.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,6 +24,7 @@ public class RecipeController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @Transactional
     public RecipeListDTO getListOfRecipes() {
         log.info("Getting all recipes");
         return new RecipeListDTO(recipeService.getAllRecipes()

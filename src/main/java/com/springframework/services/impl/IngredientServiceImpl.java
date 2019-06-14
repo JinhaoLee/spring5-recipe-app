@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -33,7 +32,7 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public List<IngredientDTO> findIngredientsByRecipeId(Long recipeId) {
         return recipeRepository.findById(recipeId)
-                .orElseThrow(()-> new NotFoundException("Recipe Not Found. For ID value: " + recipeId.toString()))
+                .orElseThrow(() -> new NotFoundException("Recipe Not Found. For ID value: " + recipeId.toString()))
                 .getIngredients()
                 .stream()
                 .map(ingredientMapper::ingredientToIngredientDTO)
@@ -103,7 +102,7 @@ public class IngredientServiceImpl implements IngredientService {
                         .findFirst();
             }
 
-            if(savedIngredientOptional.isPresent()) {
+            if (savedIngredientOptional.isPresent()) {
                 return ingredientMapper.ingredientToIngredientDTO(savedIngredientOptional.get());
             } else {
                 throw new NotFoundException("Saved ingredient not found");
@@ -116,7 +115,7 @@ public class IngredientServiceImpl implements IngredientService {
     public void deleteById(Long recipeId, Long ingredientId) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
 
-        if(recipeOptional.isPresent()){
+        if (recipeOptional.isPresent()) {
             Recipe recipe = recipeOptional.get();
             log.debug("found recipe");
 
@@ -126,13 +125,13 @@ public class IngredientServiceImpl implements IngredientService {
                     .filter(ingredient -> ingredient.getId().equals(ingredientId))
                     .findFirst();
 
-            if(ingredientOptional.isPresent()){
+            if (ingredientOptional.isPresent()) {
                 log.debug("found Ingredient");
                 Ingredient ingredientToDelete = ingredientOptional.get();
                 ingredientToDelete.setRecipe(null);
                 recipe.getIngredients().remove(ingredientOptional.get());
                 recipeRepository.save(recipe);
-            }else {
+            } else {
                 throw new NotFoundException("Ingredient Id Not found. Id: " + ingredientId);
             }
         } else {
