@@ -23,24 +23,24 @@ public class RecipeDTO {
     @Size(min = 3, max = 255)
     private String description;
 
-    @Min(1)
-    @Max(999)
+    @Min(value = 1, message = "Preparation time cannot be less than 1")
+    @Max(value = 999, message = "Preparation time cannot be greater than 999")
     private Integer prepTime;
 
-    @Min(1)
-    @Max(999)
+    @Min(value = 1, message = "Cooking time cannot be less than 1")
+    @Max(value = 999, message = "Cooking time cannot be greater than 999")
     private Integer cookTime;
 
-    @Min(1)
-    @Max(100)
+    @Min(value = 1, message = "Servings cannot be less than 1")
+    @Max(value = 100, message = "Servings cannot be greater than 100")
     private Integer servings;
 
     private String source;
 
-    @URL
+    @URL(message = "Invalid URL")
     private String url;
 
-    @NotBlank
+    @NotBlank(message = "Please provide directions")
     private String directions;
 
     private NotesDTO notes;

@@ -8,8 +8,9 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel="spring")
 public interface NotesMapper {
-    NotesMapper INSTANCE = Mappers.getMapper(NotesMapper.class);
 
     NotesDTO notesToNotesDTO(Notes notes);
-    Notes notesTdoToNotes(NotesDTO notesDTO);
+
+    @Mapping(target = "recipe", ignore = true)
+    Notes notesDtoToNotes(NotesDTO notesDTO);
 }

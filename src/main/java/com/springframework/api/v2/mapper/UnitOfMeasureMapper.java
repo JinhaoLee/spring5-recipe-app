@@ -7,6 +7,5 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel="spring")
 public interface UnitOfMeasureMapper {
-    UnitOfMeasureMapper INSTANCE = Mappers.getMapper(UnitOfMeasureMapper.class);
     UnitOfMeasureDTO unitOfMeasureToUnitMeasureDTO(UnitOfMeasure unitOfMeasure);
 }
