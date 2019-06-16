@@ -15,9 +15,8 @@ import java.util.Arrays;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -41,7 +40,7 @@ class RecipeControllerTest {
         recipe1.setId(1L);
         recipe2.setId(2L);
 
-        when(recipeService.getAllRecipes()).thenReturn(Arrays.asList(recipe1,recipe2));
+        when(recipeService.getAllRecipes()).thenReturn(Arrays.asList(recipe1, recipe2));
 
         //when/then
         mockMvc.perform(get(BASE_URL)
@@ -56,6 +55,7 @@ class RecipeControllerTest {
         RecipeDTO recipe = new RecipeDTO();
         recipe.setId(1L);
         recipe.setDescription("Perfect Guacamole");
+        recipe.setPrepTime(10);
 
         when(recipeService.getRecipeById(anyLong())).thenReturn(recipe);
 
@@ -64,18 +64,47 @@ class RecipeControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.description", equalTo("Perfect Guacamole")));
+                .andExpect(jsonPath("$.description", equalTo("Perfect Guacamole")))
+                .andExpect(jsonPath("$.prepTime", equalTo(10)));
     }
 
     @Test
-    void saveRecipe() {
+    void saveRecipe() throws Exception {
+        RecipeDTO recipe = new RecipeDTO();
+        recipe.setId(1L);
+        recipe.setDescription("tests");
+        recipe.setDirections("tests");
+
+        when(recipeService.createNewRecipe(any())).thenReturn(recipe);
+
+        mockMvc.perform(post(BASE_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"description\":\"tests\",\"directions\":\"tests\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.description", equalTo("tests")))
+                .andExpect(jsonPath("$.directions", equalTo("tests")));
     }
 
     @Test
-    void updateRecipe() {
+    void updateRecipe() throws Exception {
+        RecipeDTO recipe = new RecipeDTO();
+        recipe.setId(1L);
+        recipe.setDescription("test");
+        recipe.setDirections("test");
+
+        when(recipeService.getRecipeById(anyLong())).thenReturn(recipe);
+
+        mockMvc.perform(post(BASE_URL + "/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"description\":\"updated tests\",\"directions\":\"updated tests\"}"))
+                .andExpect(status().isOk())
+                .andReturn();
     }
 
     @Test
-    void deleteRecipe() {
+    void deleteRecipe() throws Exception {
+        mockMvc.perform(delete(BASE_URL + "/1"))
+                .andExpect(status().isOk())
+                .andReturn();
     }
 }
