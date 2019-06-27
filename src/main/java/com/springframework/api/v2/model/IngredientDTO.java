@@ -10,9 +10,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IngredientDTO {
-    private Long id;
-    private Long recipeId;
-    private String description;
-    private BigDecimal amount;
-    private UnitOfMeasureDTO uom;
+  private Long id;
+  private Long recipeId;
+  private String description;
+  private BigDecimal amount;
+  private UnitOfMeasureDTO uom;
 }

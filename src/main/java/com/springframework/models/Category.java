@@ -12,12 +12,12 @@ import java.util.List;
 @Getter
 @Setter
 public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private String description;
+  private String description;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<Recipe> recipes;
+  @ManyToMany(mappedBy = "categories")
+  private List<Recipe> recipes;
 }

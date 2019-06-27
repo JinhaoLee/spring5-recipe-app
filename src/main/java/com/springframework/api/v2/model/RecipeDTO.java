@@ -17,35 +17,35 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecipeDTO {
-    private Long id;
+  private Long id;
 
-    @NotBlank(message = "Please provide a description")
-    @Size(min = 3, max = 255)
-    private String description;
+  @NotBlank(message = "Please provide a description")
+  @Size(min = 3, max = 255)
+  private String description;
 
-    @Min(value = 1, message = "Preparation time must not be less than 1")
-    @Max(value = 999, message = "Preparation time must not be greater than 999")
-    private Integer prepTime;
+  @Min(value = 1, message = "Preparation time must not be less than 1")
+  @Max(value = 999, message = "Preparation time must not be greater than 999")
+  private Integer prepTime;
 
-    @Min(value = 1, message = "Cooking time must not be less than 1")
-    @Max(value = 999, message = "Cooking time must not be greater than 999")
-    private Integer cookTime;
+  @Min(value = 1, message = "Cooking time must not be less than 1")
+  @Max(value = 999, message = "Cooking time must not be greater than 999")
+  private Integer cookTime;
 
-    @Min(value = 1, message = "Servings must not be less than 1")
-    @Max(value = 100, message = "Servings must not be greater than 100")
-    private Integer servings;
+  @Min(value = 1, message = "Servings must not be less than 1")
+  @Max(value = 100, message = "Servings must not be greater than 100")
+  private Integer servings;
 
-    private String source;
+  private String source;
 
-    @URL(message = "Invalid URL")
-    private String url;
+  @URL(message = "Invalid URL")
+  private String url;
 
-    @NotBlank(message = "Please provide directions")
-    private String directions;
+  @NotBlank(message = "Please provide directions")
+  private String directions;
 
-    private NotesDTO notes;
-    private Difficulty difficulty;
-    private Byte[] image;
-    private List<CategoryDTO> categories = new ArrayList<>();
-    private List<IngredientDTO> ingredients = new ArrayList<>();
+  private NotesDTO notes;
+  private Difficulty difficulty;
+  private Byte[] image;
+  private List<CategoryDTO> categories = new ArrayList<>();
+  private List<IngredientDTO> ingredients = new ArrayList<>();
 }

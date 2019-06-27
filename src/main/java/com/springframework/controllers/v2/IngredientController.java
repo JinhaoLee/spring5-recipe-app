@@ -18,74 +18,72 @@ import java.util.List;
 @RestController
 @RequestMapping(IngredientController.BASE_URL)
 public class IngredientController {
-    static final String BASE_URL = "api/v2/recipe/{recipeId}/ingredients";
+  static final String BASE_URL = "api/v2/recipe/{recipeId}/ingredients";
 
-    @Autowired
-    private IngredientService ingredientService;
+  @Autowired private IngredientService ingredientService;
 
-    @Autowired
-    private RecipeService recipeService;
+  @Autowired private RecipeService recipeService;
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<IngredientDTO> getListOfIngredients(@PathVariable Long recipeId) {
-        log.debug("Getting id: " + recipeId);
-        return ingredientService.findIngredientsByRecipeId(recipeId);
+  @GetMapping
+  @ResponseStatus(HttpStatus.OK)
+  public List<IngredientDTO> getListOfIngredients(@PathVariable Long recipeId) {
+    log.debug("Getting id: " + recipeId);
+    return ingredientService.findIngredientsByRecipeId(recipeId);
+  }
+
+  @GetMapping("{ingredientId}")
+  @ResponseStatus(HttpStatus.OK)
+  public IngredientDTO getRecipeIngredient(
+      @PathVariable Long recipeId, @PathVariable Long ingredientId) {
+    return ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId);
+  }
+
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public IngredientDTO saveRecipeIngredient(
+      @PathVariable Long recipeId, @Valid @RequestBody IngredientDTO ingredientDTO) {
+    RecipeDTO recipeDTO = recipeService.getRecipeById(recipeId);
+
+    // make sure id is valid
+    if (recipeDTO == null) {
+      throw new NotFoundException("Recipe not found for id " + recipeId.toString());
     }
 
-    @GetMapping("{ingredientId}")
-    @ResponseStatus(HttpStatus.OK)
-    public IngredientDTO getRecipeIngredient(
-            @PathVariable Long recipeId, @PathVariable Long ingredientId) {
-        return ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId);
+    return ingredientService.saveIngredientDTO(ingredientDTO);
+  }
+
+  @PostMapping("{ingredientId}")
+  @ResponseStatus(HttpStatus.OK)
+  public IngredientDTO updateRecipeIngredient(
+      @PathVariable Long recipeId,
+      @PathVariable Long ingredientId,
+      @Valid @RequestBody IngredientDTO ingredientDTO) {
+    RecipeDTO recipeDTO = recipeService.getRecipeById(recipeId);
+
+    // make sure id is valid
+    if (recipeDTO == null) {
+      throw new NotFoundException("Recipe not found for id " + recipeId.toString());
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public IngredientDTO saveRecipeIngredient(
-            @PathVariable Long recipeId, @Valid @RequestBody IngredientDTO ingredientDTO) {
-        RecipeDTO recipeDTO = recipeService.getRecipeById(recipeId);
+    IngredientDTO existingIngredientDTO =
+        ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId);
 
-        // make sure id is valid
-        if (recipeDTO == null) {
-            throw new NotFoundException("Recipe not found for id " + recipeId.toString());
-        }
+    if (existingIngredientDTO != null) return ingredientService.saveIngredientDTO(ingredientDTO);
+    else {
+      throw new NotFoundException("Ingredient not found for id " + ingredientId.toString());
+    }
+  }
 
-        return ingredientService.saveIngredientDTO(ingredientDTO);
+  @DeleteMapping("{ingredientId}")
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseDTO deleteIngredient(
+      @PathVariable Long recipeId, @PathVariable Long ingredientId) {
+    try {
+      ingredientService.deleteById(recipeId, ingredientId);
+    } catch (NotFoundException e) {
+      return new ResponseDTO(e.getMessage());
     }
 
-    @PostMapping("{ingredientId}")
-    @ResponseStatus(HttpStatus.OK)
-    public IngredientDTO updateRecipeIngredient(
-            @PathVariable Long recipeId,
-            @PathVariable Long ingredientId,
-            @Valid @RequestBody IngredientDTO ingredientDTO) {
-        RecipeDTO recipeDTO = recipeService.getRecipeById(recipeId);
-
-        // make sure id is valid
-        if (recipeDTO == null) {
-            throw new NotFoundException("Recipe not found for id " + recipeId.toString());
-        }
-
-        IngredientDTO existingIngredientDTO =
-                ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId);
-
-        if (existingIngredientDTO != null) return ingredientService.saveIngredientDTO(ingredientDTO);
-        else {
-            throw new NotFoundException("Ingredient not found for id " + ingredientId.toString());
-        }
-    }
-
-    @DeleteMapping("{ingredientId}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseDTO deleteIngredient(
-            @PathVariable Long recipeId, @PathVariable Long ingredientId) {
-        try {
-            ingredientService.deleteById(recipeId, ingredientId);
-        } catch (NotFoundException e) {
-            return new ResponseDTO(e.getMessage());
-        }
-
-        return new ResponseDTO("success");
-    }
+    return new ResponseDTO("success");
+  }
 }

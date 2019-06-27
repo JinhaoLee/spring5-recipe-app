@@ -13,16 +13,14 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
-    @Autowired
-    private UnitOfMeasureRepository unitOfMeasureRepository;
+  @Autowired private UnitOfMeasureRepository unitOfMeasureRepository;
 
-    @Autowired
-    private UnitOfMeasureMapper unitOfMeasureMapper;
+  @Autowired private UnitOfMeasureMapper unitOfMeasureMapper;
 
-    @Override
-    public List<UnitOfMeasureDTO> getListOfUoms() {
-        return StreamSupport.stream(unitOfMeasureRepository.findAll().spliterator(), false)
-                .map(unitOfMeasureMapper::unitOfMeasureToUnitMeasureDTO)
-                .collect(Collectors.toList());
-    }
+  @Override
+  public List<UnitOfMeasureDTO> getListOfUoms() {
+    return StreamSupport.stream(unitOfMeasureRepository.findAll().spliterator(), false)
+        .map(unitOfMeasureMapper::unitOfMeasureToUnitMeasureDTO)
+        .collect(Collectors.toList());
+  }
 }

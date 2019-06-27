@@ -5,11 +5,11 @@ import com.springframework.api.v2.model.IngredientDTO;
 import java.util.List;
 
 public interface IngredientService {
-    List<IngredientDTO> findIngredientsByRecipeId(Long recipeId);
+  List<IngredientDTO> findIngredientsByRecipeId(Long recipeId);
 
-    IngredientDTO findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId);
+  IngredientDTO findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId);
 
-    IngredientDTO saveIngredientDTO(IngredientDTO ingredientDTO);
+  IngredientDTO saveIngredientDTO(IngredientDTO ingredientDTO);
 
-    void deleteById(Long recipeId, Long ingredientId);
+  void deleteById(Long recipeId, Long ingredientId);
 }

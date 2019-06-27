@@ -5,10 +5,10 @@ import com.springframework.models.Recipe;
 import org.mapstruct.Mapper;
 
 @Mapper(
-        componentModel = "spring",
-        uses = {NotesMapper.class, CategoryMapper.class, IngredientMapper.class})
+    componentModel = "spring",
+    uses = {NotesMapper.class, CategoryMapper.class, IngredientMapper.class})
 public interface RecipeMapper {
-    RecipeDTO recipeToRecipeDTO(Recipe recipe);
+  RecipeDTO recipeToRecipeDTO(Recipe recipe);
 
-    Recipe recipeDtoToRecipe(RecipeDTO recipeDTO);
+  Recipe recipeDtoToRecipe(RecipeDTO recipeDTO);
 }

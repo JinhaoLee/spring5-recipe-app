@@ -8,8 +8,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface NotesMapper {
 
-    NotesDTO notesToNotesDTO(Notes notes);
+  NotesDTO notesToNotesDTO(Notes notes);
 
-    @Mapping(target = "recipe", ignore = true)
-    Notes notesDtoToNotes(NotesDTO notesDTO);
+  @Mapping(target = "recipe", ignore = true)
+  Notes notesDtoToNotes(NotesDTO notesDTO);
 }

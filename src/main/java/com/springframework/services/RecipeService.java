@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface RecipeService {
 
-    List<RecipeDTO> getAllRecipes(int page, int limit, String sortBy);
+  List<RecipeDTO> getAllRecipes(int page, int limit, String sortBy);
 
-    RecipeDTO getRecipeById(Long id);
+  RecipeDTO getRecipeById(Long id);
 
-    RecipeDTO createNewRecipe(RecipeDTO recipeDto);
+  RecipeDTO createNewRecipe(RecipeDTO recipeDto);
 
-    RecipeDTO saveRecipeByDTO(Long id, RecipeDTO recipeDto);
+  RecipeDTO saveRecipeByDTO(Long id, RecipeDTO recipeDto);
 
-    void deleteRecipeById(Long id);
+  void deleteRecipeById(Long id);
 }

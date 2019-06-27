@@ -27,36 +27,36 @@ import java.util.stream.Collectors;
 @Validated // class level
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(
-            HttpMessageNotReadableException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-        final ApiErrorDTO errors = new ApiErrorDTO(HttpStatus.NOT_FOUND, ex.getLocalizedMessage());
-        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
-    }
+  @Override
+  protected ResponseEntity<Object> handleHttpMessageNotReadable(
+      HttpMessageNotReadableException ex,
+      HttpHeaders headers,
+      HttpStatus status,
+      WebRequest request) {
+    final ApiErrorDTO errors = new ApiErrorDTO(HttpStatus.NOT_FOUND, ex.getLocalizedMessage());
+    return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+  }
 
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-        List<String> errors =
-                ex.getBindingResult().getFieldErrors().stream()
-                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                        .collect(Collectors.toList());
+  @Override
+  protected ResponseEntity<Object> handleMethodArgumentNotValid(
+      MethodArgumentNotValidException ex,
+      HttpHeaders headers,
+      HttpStatus status,
+      WebRequest request) {
+    List<String> errors =
+        ex.getBindingResult().getFieldErrors().stream()
+            .map(DefaultMessageSourceResolvable::getDefaultMessage)
+            .collect(Collectors.toList());
 
-        final ApiErrorDTO apiError =
-                new ApiErrorDTO(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
-        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
-    }
+    final ApiErrorDTO apiError =
+        new ApiErrorDTO(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+    return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+  }
 
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<Object> recipeHandleNotFound(Exception ex, WebRequest request)
-            throws IOException {
-        final ApiErrorDTO errors = new ApiErrorDTO(HttpStatus.NOT_FOUND, ex.getLocalizedMessage());
-        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
-    }
+  @ExceptionHandler(NotFoundException.class)
+  public ResponseEntity<Object> recipeHandleNotFound(Exception ex, WebRequest request)
+      throws IOException {
+    final ApiErrorDTO errors = new ApiErrorDTO(HttpStatus.NOT_FOUND, ex.getLocalizedMessage());
+    return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+  }
 }

@@ -15,27 +15,27 @@ import java.util.ArrayList;
 @EnableSwagger2
 @Configuration
 public class SwaggerConfig {
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build()
-                .pathMapping("/")
-                .apiInfo(metaData());
-    }
+  @Bean
+  public Docket api() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.any())
+        .paths(PathSelectors.any())
+        .build()
+        .pathMapping("/")
+        .apiInfo(metaData());
+  }
 
-    private ApiInfo metaData() {
-        Contact contact = new Contact("Jinhao", "https://google.com.au", "lijinhao828@gmail.com");
-        return new ApiInfo(
-                "Spring Framework",
-                "Spring Framework 5: Recipe Application",
-                "1.0",
-                "Terms of Service: blah",
-                contact,
-                "Apache License Version 2.0",
-                "https://www.apache.org/licenses/LICENSE-2.0",
-                new ArrayList<>());
-    }
+  private ApiInfo metaData() {
+    Contact contact = new Contact("Jinhao", "https://google.com.au", "lijinhao828@gmail.com");
+    return new ApiInfo(
+        "Spring Framework",
+        "Spring Framework 5: Recipe Application",
+        "1.0",
+        "Terms of Service: blah",
+        contact,
+        "Apache License Version 2.0",
+        "https://www.apache.org/licenses/LICENSE-2.0",
+        new ArrayList<>());
+  }
 }

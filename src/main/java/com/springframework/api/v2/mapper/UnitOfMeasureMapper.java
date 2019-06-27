@@ -6,5 +6,5 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface UnitOfMeasureMapper {
-    UnitOfMeasureDTO unitOfMeasureToUnitMeasureDTO(UnitOfMeasure unitOfMeasure);
+  UnitOfMeasureDTO unitOfMeasureToUnitMeasureDTO(UnitOfMeasure unitOfMeasure);
 }

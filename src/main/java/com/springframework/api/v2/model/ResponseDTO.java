@@ -7,6 +7,5 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class ResponseDTO {
-    @NonNull
-    private final String message;
+  @NonNull private final String message;
 }

@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UnitOfMeasureDTO {
-    private Long id;
-    private String description;
+  private Long id;
+  private String description;
 }
