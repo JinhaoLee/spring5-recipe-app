@@ -7,6 +7,8 @@ import com.springframework.models.Recipe;
 import com.springframework.repositories.RecipeRepository;
 import com.springframework.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,11 +24,13 @@ public class RecipeServiceImpl implements RecipeService {
     private RecipeMapper recipeMapper;
 
     @Override
-    public List<RecipeDTO> getAllRecipes() {
+    public List<RecipeDTO> getAllRecipes(int page, int limit) {
+        Pageable pageableRequest = PageRequest.of(page, limit);
+
         return recipeRepository
-                .findAll()
+                .findAll(pageableRequest)
                 .stream()
-                .map( recipe -> recipeMapper.recipeToRecipeDTO(recipe))
+                .map(recipe -> recipeMapper.recipeToRecipeDTO(recipe))
                 .collect(Collectors.toList());
     }
 
@@ -36,7 +40,7 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeRepository
                 .findById(id)
                 .map(recipeMapper::recipeToRecipeDTO)
-                .orElseThrow(()-> new NotFoundException("Recipe Not Found. For ID value: " + id.toString() ));
+                .orElseThrow(() -> new NotFoundException("Recipe Not Found. For ID value: " + id.toString()));
     }
 
     @Override
@@ -59,7 +63,7 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.deleteById(id);
     }
 
-    private RecipeDTO saveAndReturnDTO(Recipe recipe){
+    private RecipeDTO saveAndReturnDTO(Recipe recipe) {
         Recipe savedRecipe = recipeRepository.save(recipe);
         return recipeMapper.recipeToRecipeDTO(savedRecipe);
     }

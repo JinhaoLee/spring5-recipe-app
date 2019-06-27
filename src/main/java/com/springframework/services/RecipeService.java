@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RecipeService {
 
-    List<RecipeDTO> getAllRecipes();
+    List<RecipeDTO> getAllRecipes(int page, int limit);
 
     RecipeDTO getRecipeById(Long id);
 
