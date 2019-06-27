@@ -6,9 +6,12 @@
 
 ### Frameworks and Libraries:
 
+- Java 8
 - Java Spring 2.1.5
-- Java Version 1.8
 - mapstruct 1.3.0
-- swagger 2.9.2
-- lombok 1.18.8
-- junit 5
+- Swagger 2.9.2
+- Lombok 1.18.8
+- Junit 5
+- Java Security 2.1.5
+- slf4j 1.7.5
+- mysql

@@ -87,9 +87,8 @@ public class RecipeServiceImpl implements RecipeService {
     private Sort.Direction replaceOrderStringThroughDirection(String sortDirection) {
         if (sortDirection.equalsIgnoreCase("DESC")) {
             return Sort.Direction.DESC;
-        } else {
-            return Sort.Direction.ASC;
         }
+        return Sort.Direction.ASC;
     }
 
 }
