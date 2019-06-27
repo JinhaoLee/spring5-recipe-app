@@ -23,16 +23,16 @@ public class RecipeDTO {
     @Size(min = 3, max = 255)
     private String description;
 
-    @Min(value = 1, message = "Preparation time cannot be less than 1")
-    @Max(value = 999, message = "Preparation time cannot be greater than 999")
+    @Min(value = 1, message = "Preparation time must not be less than 1")
+    @Max(value = 999, message = "Preparation time must not be greater than 999")
     private Integer prepTime;
 
-    @Min(value = 1, message = "Cooking time cannot be less than 1")
-    @Max(value = 999, message = "Cooking time cannot be greater than 999")
+    @Min(value = 1, message = "Cooking time must not be less than 1")
+    @Max(value = 999, message = "Cooking time must not be greater than 999")
     private Integer cookTime;
 
-    @Min(value = 1, message = "Servings cannot be less than 1")
-    @Max(value = 100, message = "Servings cannot be greater than 100")
+    @Min(value = 1, message = "Servings must not be less than 1")
+    @Max(value = 100, message = "Servings must not be greater than 100")
     private Integer servings;
 
     private String source;
