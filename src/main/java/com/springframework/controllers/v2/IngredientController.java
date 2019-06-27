@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(IngredientController.BASE_URL)
 public class IngredientController {
-    public final static String BASE_URL = "api/v2/recipe/{recipeId}/ingredients";
+    final static String BASE_URL = "api/v2/recipe/{recipeId}/ingredients";
 
     @Autowired
     private IngredientService ingredientService;

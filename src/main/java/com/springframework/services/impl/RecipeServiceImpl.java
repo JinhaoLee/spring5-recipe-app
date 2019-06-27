@@ -9,9 +9,11 @@ import com.springframework.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,8 +26,22 @@ public class RecipeServiceImpl implements RecipeService {
     private RecipeMapper recipeMapper;
 
     @Override
-    public List<RecipeDTO> getAllRecipes(int page, int limit) {
-        Pageable pageableRequest = PageRequest.of(page, limit);
+    public List<RecipeDTO> getAllRecipes(int page, int limit, String sortBy) {
+        Sort allSort;
+        try {
+            allSort = Sort.by(
+                    Arrays.stream(sortBy.split(","))
+                            .map(sort -> sort.split(":"))
+                            .map(sortParam -> new Sort.Order(replaceOrderStringThroughDirection(sortParam[1]),
+                                    sortParam[0]).ignoreCase())
+                            .collect(Collectors.toList())
+
+            );
+        } catch (Exception e) {
+            throw new NotFoundException("parameters not found");
+        }
+
+        Pageable pageableRequest = PageRequest.of(page, limit, allSort);
 
         return recipeRepository
                 .findAll(pageableRequest)
@@ -68,5 +84,12 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeMapper.recipeToRecipeDTO(savedRecipe);
     }
 
+    private Sort.Direction replaceOrderStringThroughDirection(String sortDirection) {
+        if (sortDirection.equalsIgnoreCase("DESC")) {
+            return Sort.Direction.DESC;
+        } else {
+            return Sort.Direction.ASC;
+        }
+    }
 
 }

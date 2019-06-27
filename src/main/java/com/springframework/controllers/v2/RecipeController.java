@@ -25,10 +25,11 @@ public class RecipeController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @Transactional
-    public RecipeListDTO getListOfRecipes(@RequestParam(value = "page", defaultValue = "0") int page,
-                                          @RequestParam(value = "limit", defaultValue = "30") int limit) {
-        log.info("Getting all recipes");
-        return new RecipeListDTO(recipeService.getAllRecipes(page, limit)
+    public RecipeListDTO getListOfRecipes(@RequestParam(value = "page", defaultValue = "0", required = false) int page,
+                                          @RequestParam(value = "limit", defaultValue = "30", required = false) int limit,
+                                          @RequestParam(value = "sort", defaultValue = "id:asc", required = false) String sort) {
+        log.info("Getting all recipes for page: " + page + " limit: " + limit + " sortBy: " + sort);
+        return new RecipeListDTO(recipeService.getAllRecipes(page, limit, sort)
         );
     }
 

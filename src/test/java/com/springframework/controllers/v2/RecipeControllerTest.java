@@ -41,7 +41,7 @@ class RecipeControllerTest {
         recipe1.setId(1L);
         recipe2.setId(2L);
 
-        when(recipeService.getAllRecipes(0, 30)).thenReturn(Arrays.asList(recipe1, recipe2));
+        when(recipeService.getAllRecipes(0, 30, "id:asc")).thenReturn(Arrays.asList(recipe1, recipe2));
 
         //when/then
         mockMvc.perform(get(BASE_URL)
