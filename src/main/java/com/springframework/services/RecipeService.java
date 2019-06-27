@@ -1,7 +1,6 @@
 package com.springframework.services;
 
 import com.springframework.api.v2.model.RecipeDTO;
-import com.springframework.models.Recipe;
 
 import java.util.List;
 

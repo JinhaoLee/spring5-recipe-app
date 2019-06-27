@@ -27,8 +27,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo metaData() {
-        Contact contact = new Contact("Jinhao", "https://google.com.au",
-                "lijinhao828@gmail.com");
+        Contact contact = new Contact("Jinhao", "https://google.com.au", "lijinhao828@gmail.com");
         return new ApiInfo(
                 "Spring Framework",
                 "Spring Framework 5: Recipe Application",

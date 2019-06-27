@@ -1,9 +1,8 @@
 package com.springframework.models;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -17,6 +16,7 @@ public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String description;
     private BigDecimal amount;
 
@@ -35,8 +35,8 @@ public class Ingredient {
         this.unitOfMeasure = unitOfMeasure;
     }
 
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure,
-                      Recipe recipe) {
+    public Ingredient(
+            String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {
         this.description = description;
         this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;

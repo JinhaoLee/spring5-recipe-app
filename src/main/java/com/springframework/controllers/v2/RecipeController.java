@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RequestMapping(RecipeController.BASE_URL)
 public class RecipeController {
 
-    final static String BASE_URL = "api/v2/recipes";
+    static final String BASE_URL = "api/v2/recipes";
 
     @Autowired
     private RecipeService recipeService;
@@ -25,12 +25,12 @@ public class RecipeController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @Transactional
-    public RecipeListDTO getListOfRecipes(@RequestParam(value = "page", defaultValue = "0", required = false) int page,
-                                          @RequestParam(value = "limit", defaultValue = "30", required = false) int limit,
-                                          @RequestParam(value = "sort", defaultValue = "id:asc", required = false) String sort) {
+    public RecipeListDTO getListOfRecipes(
+            @RequestParam(value = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(value = "limit", defaultValue = "30", required = false) int limit,
+            @RequestParam(value = "sort", defaultValue = "id:asc", required = false) String sort) {
         log.info("Getting all recipes for page: " + page + " limit: " + limit + " sortBy: " + sort);
-        return new RecipeListDTO(recipeService.getAllRecipes(page, limit, sort)
-        );
+        return new RecipeListDTO(recipeService.getAllRecipes(page, limit, sort));
     }
 
     @GetMapping("{id}")
@@ -61,5 +61,4 @@ public class RecipeController {
         recipeService.deleteRecipeById(id);
         return new ResponseDTO("success");
     }
-
 }

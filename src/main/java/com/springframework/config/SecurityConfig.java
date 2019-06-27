@@ -15,10 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth
-                .inMemoryAuthentication()
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
                 .withUser("user")
                 .password(passwordEncoder().encode("password"))
                 .roles("USER")
@@ -35,17 +33,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http.csrf()
+                .disable()
                 .authorizeRequests()
-                .antMatchers("/swagger-ui.html").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/v2/**").hasRole("USER")
-                .antMatchers(HttpMethod.DELETE, "/api/v2/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/v2/**").permitAll()
+                .antMatchers("/swagger-ui.html")
+                .hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/v2/**")
+                .hasRole("USER")
+                .antMatchers(HttpMethod.DELETE, "/api/v2/**")
+                .hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/v2/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic()
-        ;
+                .httpBasic();
     }
 }

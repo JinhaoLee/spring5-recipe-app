@@ -4,9 +4,8 @@ import com.springframework.api.v2.model.IngredientDTO;
 import com.springframework.models.Ingredient;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel="spring", uses = UnitOfMeasureMapper.class)
+@Mapper(componentModel = "spring", uses = UnitOfMeasureMapper.class)
 public interface IngredientMapper {
     @Mapping(target = "recipeId", source = "recipe.id")
     @Mapping(target = "uom", source = "unitOfMeasure")

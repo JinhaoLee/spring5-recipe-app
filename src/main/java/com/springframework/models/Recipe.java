@@ -38,11 +38,11 @@ public class Recipe {
     private List<Ingredient> ingredients = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(name="recipe_category",
+    @JoinTable(
+            name = "recipe_category",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories = new ArrayList<>();
-
 
     public void setNotes(Notes notes) {
         if (notes != null) {
@@ -51,16 +51,14 @@ public class Recipe {
         }
     }
 
-    public void addIngredient(Ingredient ingredient){
+    public void addIngredient(Ingredient ingredient) {
         if (ingredient != null) {
             this.ingredients.add(ingredient);
             ingredient.setRecipe(this);
         }
-
     }
 
-    public void setIngredients(final List<Ingredient> ingredients){
+    public void setIngredients(final List<Ingredient> ingredients) {
         ingredients.forEach(this::addIngredient);
     }
-
 }

@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import java.util.Collections;
 import java.util.List;
 
-
 @Data
 public class ApiErrorDTO {
     private HttpStatus status;
@@ -33,5 +32,4 @@ public class ApiErrorDTO {
         this.message = message;
         errors = Collections.singletonList(error);
     }
-
 }

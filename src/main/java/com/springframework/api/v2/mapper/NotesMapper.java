@@ -4,9 +4,8 @@ import com.springframework.api.v2.model.NotesDTO;
 import com.springframework.models.Notes;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel="spring")
+@Mapper(componentModel = "spring")
 public interface NotesMapper {
 
     NotesDTO notesToNotesDTO(Notes notes);

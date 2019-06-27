@@ -29,26 +29,28 @@ public class RecipeServiceImpl implements RecipeService {
     public List<RecipeDTO> getAllRecipes(int page, int limit, String sortBy) {
         Sort allSort;
         try {
-            allSort = Sort.by(
-                    Arrays.stream(sortBy.split(","))
-                            .map(sort -> sort.split(":"))
-                            .map(sortParam -> sortParam.length == 2 ?
-                                    new Sort.Order(replaceOrderStringThroughDirection(sortParam[1]),
-                                            sortParam[0]).ignoreCase() :
-                                    new Sort.Order(replaceOrderStringThroughDirection("asc"),
-                                    sortParam[0]).ignoreCase())
-                            .collect(Collectors.toList())
-
-            );
+            allSort =
+                    Sort.by(
+                            Arrays.stream(sortBy.split(","))
+                                    .map(sort -> sort.split(":"))
+                                    .map(
+                                            sortParam ->
+                                                    sortParam.length == 2
+                                                            ? new Sort.Order(
+                                                            replaceOrderStringThroughDirection(sortParam[1]),
+                                                            sortParam[0])
+                                                            .ignoreCase()
+                                                            : new Sort.Order(
+                                                            replaceOrderStringThroughDirection("asc"), sortParam[0])
+                                                            .ignoreCase())
+                                    .collect(Collectors.toList()));
         } catch (Exception e) {
             throw new NotFoundException("parameters not found");
         }
 
         Pageable pageableRequest = PageRequest.of(page, limit, allSort);
 
-        return recipeRepository
-                .findAll(pageableRequest)
-                .stream()
+        return recipeRepository.findAll(pageableRequest).stream()
                 .map(recipe -> recipeMapper.recipeToRecipeDTO(recipe))
                 .collect(Collectors.toList());
     }
@@ -59,7 +61,8 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeRepository
                 .findById(id)
                 .map(recipeMapper::recipeToRecipeDTO)
-                .orElseThrow(() -> new NotFoundException("Recipe Not Found. For ID value: " + id.toString()));
+                .orElseThrow(
+                        () -> new NotFoundException("Recipe Not Found. For ID value: " + id.toString()));
     }
 
     @Override
@@ -93,5 +96,4 @@ public class RecipeServiceImpl implements RecipeService {
         }
         return Sort.Direction.ASC;
     }
-
 }

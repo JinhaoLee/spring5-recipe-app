@@ -18,14 +18,13 @@ import java.util.List;
 @RestController
 @RequestMapping(IngredientController.BASE_URL)
 public class IngredientController {
-    final static String BASE_URL = "api/v2/recipe/{recipeId}/ingredients";
+    static final String BASE_URL = "api/v2/recipe/{recipeId}/ingredients";
 
     @Autowired
     private IngredientService ingredientService;
 
     @Autowired
     private RecipeService recipeService;
-
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -36,14 +35,15 @@ public class IngredientController {
 
     @GetMapping("{ingredientId}")
     @ResponseStatus(HttpStatus.OK)
-    public IngredientDTO getRecipeIngredient(@PathVariable Long recipeId, @PathVariable Long ingredientId) {
+    public IngredientDTO getRecipeIngredient(
+            @PathVariable Long recipeId, @PathVariable Long ingredientId) {
         return ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public IngredientDTO saveRecipeIngredient(@PathVariable Long recipeId,
-                                              @Valid @RequestBody IngredientDTO ingredientDTO) {
+    public IngredientDTO saveRecipeIngredient(
+            @PathVariable Long recipeId, @Valid @RequestBody IngredientDTO ingredientDTO) {
         RecipeDTO recipeDTO = recipeService.getRecipeById(recipeId);
 
         // make sure id is valid
@@ -56,9 +56,10 @@ public class IngredientController {
 
     @PostMapping("{ingredientId}")
     @ResponseStatus(HttpStatus.OK)
-    public IngredientDTO updateRecipeIngredient(@PathVariable Long recipeId,
-                                                @PathVariable Long ingredientId,
-                                                @Valid @RequestBody IngredientDTO ingredientDTO) {
+    public IngredientDTO updateRecipeIngredient(
+            @PathVariable Long recipeId,
+            @PathVariable Long ingredientId,
+            @Valid @RequestBody IngredientDTO ingredientDTO) {
         RecipeDTO recipeDTO = recipeService.getRecipeById(recipeId);
 
         // make sure id is valid
@@ -66,10 +67,10 @@ public class IngredientController {
             throw new NotFoundException("Recipe not found for id " + recipeId.toString());
         }
 
-        IngredientDTO existingIngredientDTO = ingredientService.findByRecipeIdAndIngredientId(recipeId,ingredientId);
+        IngredientDTO existingIngredientDTO =
+                ingredientService.findByRecipeIdAndIngredientId(recipeId, ingredientId);
 
-        if (existingIngredientDTO != null)
-            return ingredientService.saveIngredientDTO(ingredientDTO);
+        if (existingIngredientDTO != null) return ingredientService.saveIngredientDTO(ingredientDTO);
         else {
             throw new NotFoundException("Ingredient not found for id " + ingredientId.toString());
         }
@@ -77,11 +78,11 @@ public class IngredientController {
 
     @DeleteMapping("{ingredientId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseDTO deleteIngredient(@PathVariable Long recipeId,
-                                        @PathVariable Long ingredientId) {
+    public ResponseDTO deleteIngredient(
+            @PathVariable Long recipeId, @PathVariable Long ingredientId) {
         try {
-            ingredientService.deleteById(recipeId,ingredientId);
-        } catch (NotFoundException e){
+            ingredientService.deleteById(recipeId, ingredientId);
+        } catch (NotFoundException e) {
             return new ResponseDTO(e.getMessage());
         }
 
