@@ -16,6 +16,7 @@ import java.util.Arrays;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -77,7 +78,7 @@ class RecipeControllerTest {
 
         when(recipeService.createNewRecipe(any())).thenReturn(recipe);
 
-        mockMvc.perform(post(BASE_URL)
+        mockMvc.perform(post(BASE_URL).with(httpBasic("user", "password"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"description\":\"tests\",\"directions\":\"tests\"}"))
                 .andExpect(status().isCreated())
@@ -95,6 +96,7 @@ class RecipeControllerTest {
         when(recipeService.getRecipeById(anyLong())).thenReturn(recipe);
 
         mockMvc.perform(post(BASE_URL + "/1")
+                .with(httpBasic("user", "password"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"description\":\"updated tests\",\"directions\":\"updated tests\"}"))
                 .andExpect(status().isOk())
@@ -103,7 +105,8 @@ class RecipeControllerTest {
 
     @Test
     void deleteRecipe() throws Exception {
-        mockMvc.perform(delete(BASE_URL + "/1"))
+        mockMvc.perform(delete(BASE_URL + "/1").
+                with(httpBasic("admin", "admin")))
                 .andExpect(status().isOk())
                 .andReturn();
     }
