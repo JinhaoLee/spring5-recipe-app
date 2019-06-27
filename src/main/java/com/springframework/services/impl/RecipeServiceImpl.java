@@ -32,7 +32,10 @@ public class RecipeServiceImpl implements RecipeService {
             allSort = Sort.by(
                     Arrays.stream(sortBy.split(","))
                             .map(sort -> sort.split(":"))
-                            .map(sortParam -> new Sort.Order(replaceOrderStringThroughDirection(sortParam[1]),
+                            .map(sortParam -> sortParam.length == 2 ?
+                                    new Sort.Order(replaceOrderStringThroughDirection(sortParam[1]),
+                                            sortParam[0]).ignoreCase() :
+                                    new Sort.Order(replaceOrderStringThroughDirection("asc"),
                                     sortParam[0]).ignoreCase())
                             .collect(Collectors.toList())
 
